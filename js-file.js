@@ -21,7 +21,7 @@ let currentSlide = 0;
             displaySlide();
         })
     }      
-})()
+})();
 
 // function to move current slide value
 function changeSlide(direction) {
@@ -39,7 +39,7 @@ function changeSlide(direction) {
             console.log("changeSlide error");
     }
     displaySlide();
-}
+};
 
 function displaySlide() {
     const slides = document.getElementsByClassName('slide');
@@ -51,4 +51,22 @@ function displaySlide() {
         currentSlide = slidesLength - 1;
     }
     slides[currentSlide].setAttribute('data-active', slides[currentSlide]);
-}
+};
+
+// move slide every 5 seconds
+function automatic() {
+    let slides = document.getElementsByClassName('slide');
+    let l = slides.length;
+    
+    slides[currentSlide].removeAttribute('data-active', slides[currentSlide]);
+    currentSlide++;  
+    if (currentSlide >= l) {
+        currentSlide = 0;
+    } else if (currentSlide < 0) {
+        currentSlide = l-1;
+    }
+    slides[currentSlide].setAttribute('data-active', slides[currentSlide]);
+    
+};
+
+setInterval(automatic, 5000);  
